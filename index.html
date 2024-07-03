@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Start Navbar section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-5">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="images/logo.png" class="logo me-2" alt="">
+            <div class="logo-type">
+                <h1 class="title fw-bolder mb-1">Weather</h1>
+                <p class="description mb-2">tagline goes here</p>
+            </div>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">News</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Live cameras</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Photo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <!-- End Navbar section -->
+
+    <!-- Start Home section -->
+    <header id="home">
+        <div class="home-section">
+            <div class="layer py-5">
+                <div class="container">
+                    <div class="home-content">
+                        <form class="search-location mb-5">
+                            <input class="w-100" type="text" placeholder="Find your location...." id="find">
+                            <input type="button" value="Find" id="submit">
+                        </form>
+                    </div>
+                </div>
+                 <!-- START WEATHER section -->
+                <section id="weather-table">
+                  <div class="container">
+                      <div class="weather-container" id="forecast">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="forecast-today">
+                                      <div class="forecast-header d-flex justify-content-between" id="today">
+                                          <div id="current-day" class="day">Saturday</div>
+                                          <div id="current-date" class="data">25 February</div>
+                                      </div>
+                                      <div class="forecast-content" id="current">
+                                        <div id="location"></div>
+                                        <div class="degree d-flex justify-content-around">
+                                          <div class="degree-one d-flex">
+                                            <div id="current-degree" class="num"></div>
+                                            <div><sup>o</sup>C</div>
+                                          </div>
+                                          <div class="forecast-icon">
+                                              <img id="current-icon"  width="90">
+                                          </div>
+                                        </div>
+                                        <div class="custom" id="current-desc"></div>
+                                        <div class="forecast-icon">
+                                          <i class="fas fa-umbrella pr-1"></i>
+                                          <span id="humidty"></span>
+                                          <span class="me-3">%</span>
+                                          <i class="fas fa-wind pl-3 pr-1"></i>
+                                          <span id="wind"></span>
+                                          <span class="me-3">km/h</span>
+                                          <i class="far fa-compass pl-3 pr-1"></i>
+                                          <span id="compass"></span>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div> 
+                              <div class="col-md-4">
+                                <div class="forcast">
+                                  <div class="forecast-header">
+                                      <div class="nextDay text-center">Monday</div>
+                                  </div>
+                                  <div class="forecast-content">
+                                      <div class="forecast-icon">
+                                          <img class="nextDay-icon" width="48">
+                                      </div>
+                                     <div class="two d-flex justify-content-center">
+                                        <div class="maxDeg"></div>
+                                        <div class="maxDegOne text-white"><sup>o</sup>C</div>
+                                      </div>
+                                      <div class="three d-flex justify-content-center">
+                                        <p class="minDeg"></p>
+                                        <p class="minDegOne"><sup>o</sup>C</p>
+                                      </div>
+                                      <div class="custom nextDay-desc"></div>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="forcast" id="one">
+                                  <div class="forecast-header">
+                                      <div class="nextDay text-center">Tuesday</div>
+                                  </div>
+                                  <div class="forecast-content">
+                                      <div class="forecast-icon">
+                                          <img class="nextDay-icon" width="48">
+                                      </div>
+                                      <div class="two d-flex justify-content-center">
+                                        <div class="maxDeg"></div>
+                                        <div class="maxDegOne text-white"><sup>o</sup>C</div>
+                                      </div>
+                                      <div class="three d-flex justify-content-center">
+                                        <p class="minDeg"></p>
+                                        <p class="minDegOne"><sup>o</sup>C</p>
+                                      </div>
+                                      <div class="custom nextDay-desc"></div>
+                                  </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </section>
+                <!-- END WEATHER section -->
+            </div>
+        </div>
+    </header>
+    <!-- End Home section -->
+    
+    <div id="empty"></div>
+
+    <!-- START FOOTER section -->
+    <footer class="footer details py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <form action="#" class="form-email">
+              <input type="text" placeholder="Enter your email to subscribe...">
+              <input type="submit" value="Subscribe">
+            </form>
+          </div>
+          <div class="col-md-3 col-md-offset-1">
+            <div class="social-icons d-flex">
+              <div class="icon d-flex mx-1 align-items-center justify-content-center">
+                  <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+              </div>
+              <div class="icon d-flex mx-1 align-items-center justify-content-center">
+                  <a href=""><i class="fa-brands fa-twitter"></i></a>
+              </div>
+              <div class="icon d-flex mx-1 align-items-center justify-content-center">
+                  <a href=""><i class="fa-brands fa-google-plus-g"></i></a>
+              </div>
+              <div class="icon d-flex mx-1 align-items-center justify-content-center">
+                  <a href=""><i class="fa-brands fa-pinterest"></i></a>
+              </div>
+          </div>            
+          </div>
+        </div>
+        <p class="title">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+      </div>
+    </footer>
+    <!-- End FOOTER section -->
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
