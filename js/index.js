@@ -61,7 +61,7 @@ function showPosition(p){
 }
 //fetch API
 async function getWeatherData(cityName){
-    apiResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=77c0d99266ef44ccae5105853230103&q=${cityName}&days=3`);
+    apiResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=91104460511c4da8b7d163108240107&q=${cityName}&days=3`);
     responseData = await apiResponse.json()
     console.log(responseData); // return data from API
    
