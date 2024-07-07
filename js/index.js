@@ -107,7 +107,7 @@ async function Bind(city){
 // search functionality
 search.addEventListener("input", function(){
   console.log(search.value);
- if(search.value.length < 3){
+ if(!search.value.length < 3){
    Bind(search.value);
  }
 
