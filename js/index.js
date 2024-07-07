@@ -1,114 +1,53 @@
-"use strict"
-// forecast-today
-let search = document.getElementById("find"),
-currentDay = document.getElementById("current-day"),
-currentDate = document.getElementById("current-date"),
-cityLocation = document.getElementById("location"),
-currentDeg = document.getElementById("current-degree"),
-currentIcon = document.getElementById("current-icon"),
-currentDesc = document.getElementById("current-desc"),
-humidty = document.getElementById("humidty"),
-wind = document.getElementById("wind"),
-compass = document.getElementById("compass");
+// left menubar
 
-// Next-forecast
-let nextDay = document.getElementsByClassName("nextDay"),
-nextDayIcon = document.getElementsByClassName("nextDay-icon"),
-maxDeg = document.getElementsByClassName("maxDeg"),
-minDeg = document.getElementsByClassName("minDeg"),
-nextDayDesc = document.getElementsByClassName("nextDay-desc"),
-
-apiResponse,
-responseData,
-
- days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-]
-let monthName =[
-    'Jan',
-    'Feb',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec'
-];
-
-// current location function
-let latitude;
-let longitude;
-let currentLocation;
-if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(showPosition);
-}
-function showPosition(p){
-    latitude = p.coords.latitude;
-    longitude = p.coords.longitude;
-    currentLocation = latitude +','+ longitude;
-    console.log(currentLocation);
-    Bind(currentLocation);
-}
-//fetch API
-async function getWeatherData(cityName){
-    apiResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=77c0d99266ef44ccae5105853230103&q=${cityName}&days=3`);
-    responseData = await apiResponse.json()
-    console.log(responseData); // return data from API
-   
-    return responseData
-
-}
-
-
-function displayTodayWeather(data){
-    let date = new Date();
-    // console.log(monthName[date.getMonth()]);
-    currentDay.innerHTML = days[date.getDay()]; // show day
-    currentDate.innerHTML = `${date.getDate()} ${monthName[date.getMonth()]}`; // show month
-    cityLocation.innerHTML = data.location.name; // show location
-    currentDeg.innerHTML = data.current.temp_c; // show temperature c
-    currentIcon.setAttribute("src",`https:${data.current.condition.icon}`); // show icon
-    currentDesc.innerHTML = data.current.condition.text;
-    humidty.innerHTML = data.current.humidity;
-    wind.innerHTML = data.current.wind_kph;
-    compass.innerHTML = data.current.wind_dir;
-}
-// display next days data
-function displayNextDayWeather(data){
-    let forcastData = data.forecast.forecastday;
-    console.log(forcastData);
-    for(let i=0;i<2;i++){
-        nextDay[i].innerHTML = days[new Date(forcastData[i+1].date).getDay()];
-        maxDeg[i].innerHTML = forcastData[i+1].day.maxtemp_c;
-        minDeg[i].innerHTML = forcastData[i+1].day.mintemp_c;
-        nextDayIcon[i].setAttribute('src',`https:${forcastData[i+1].day.condition.icon}`);
-        nextDayDesc[i].innerHTML = forcastData[i+1].day.condition.text
-    }
-}
-// Bind functions
-async function Bind(city){
-    let weatherData = await getWeatherData(city);
-    if(!weatherData.error){
-        displayTodayWeather(weatherData);
-        displayNextDayWeather(weatherData);
-    }   
-}
-
-// search functionality
-search.addEventListener("input", function(){
-  console.log(search.value);
-  Bind(search.value);
+$(".openNav").click(function(){
+    $("#leftMenu").animate({ width:'250px'},50)
+   $("#home-content").animate({marginLeft :'250px'},50)
 })
 
+$(".closebtn").click(function(){
+    $("#leftMenu").animate({ width:'0px'},50)
+   $("#home-content").animate({marginLeft :'0px'},50)
+})
+// Accordion
 
+$('#sliderDown .toggle').click(function(){
+    $(this).next().slideToggle(500);
+    $('div.inner').not($(this).next()).slideUp(500); // (not) ay 7age msh gmb el next ely 3ayz aft7ha (slide up) 3ks el slide toggle
+});
+// textarea
+
+$('textarea').keyup(function() {
+   let mylength = $(this).val().length;
+   console.log(mylength);
+   $('#chars').text(
+    100 - mylength <= 0 ? 'your available characters finished' : 100 - mylength
+   )
+});
+
+
+/*counter timer */
+let eventDate = new Date("Oct 25 2023 ");
+        setInterval(() => {
+            let nowDate = new Date();
+            let differTime = eventDate.getTime() / 1000 - nowDate.getTime() / 1000; /*
+            calculates the difference in seconds between the eventDate and the current time (nowDate).
+            eventDate.getTime(): This gets the timestamp in milliseconds
+            Both timestamps are divided by 1000 to convert the milliseconds to seconds.
+             There are 1000 milliseconds in 1 second, so dividing by 1000 gives us the equivalent value in seconds.
+            */
+            let eventDays = Math.floor(differTime / (60 * 60 * 24)); // by multiplying (60*60*24) returns the equivalent value in seconds for whole days
+                                                                     // 60*60*24 = 86400 seconds in a day
+            let eventHours = Math.floor((differTime - (eventDays * (24 * 60 * 60))) / 3600); //divides the remainder time by the number of milliseconds in an hour
+                                                                                            // 3600 = 60*60 seconds in an hour
+            let eventMinutes = Math.floor((differTime - (eventDays * (24 * 60 * 60)) - (eventHours * 3600)) / 60); // Dividing the remaining milliseconds by 60 gives us the decimal minutes.
+            let eventSeconds = Math.floor(differTime - (eventDays * (24 * 60 * 60)) - (eventHours * (60 * 60)) - (eventMinutes * (60)));/*
+            Subtracting this from the remainder time gives us the remaining milliseconds after subtracting both whole days and whole hours.
+            */
+
+            $(".days").html(`${eventDays} D`);
+            $(".hours").html(`${eventHours} H`);
+            $(".minutes").html(`${eventMinutes} M`);
+            $(".seconds").html(`${eventSeconds} S`);
+        }, 1000);
 
